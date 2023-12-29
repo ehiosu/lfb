@@ -49,7 +49,7 @@ export const DesignerElementsWrapper = ({
   if(draggable.isDragging) return null
   return (
     <div
-      className={cn("w-full   relative border-2 border-neutral-100/20 rounded-lg",selectedElement===element&&'border-[3] border-white')}
+      className={`w-full   relative   rounded-lg ${selectedElement===element?'border-2 border-white':element.type==="H1"?'border-transparent':'border-neutral-200/30 border-2'}`}
       ref={draggable.setNodeRef}
       {...draggable.attributes}
       {...draggable.listeners}
