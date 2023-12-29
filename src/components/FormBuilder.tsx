@@ -6,7 +6,7 @@ import DragOverlayWrapper from './DragOverlayWrapper'
 import { useBuilder } from '@/hooks/UseBuilder'
 type Props = {}
 
-export const FormBuilder:React.FC = (props: Props) => {
+export const FormBuilder:React.FC = () => {
   const {selectedElement,setSelectedElement}=useBuilder()
   const mouseSensor=useSensor(MouseSensor,{
     activationConstraint:{
