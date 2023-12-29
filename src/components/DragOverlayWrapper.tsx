@@ -13,10 +13,10 @@ const DragOverlayWrapper = (props: Props) => {
         onDragStart:(event)=> {
             setDraggedNode(event.active)
         },
-        onDragCancel:(event)=> {
+        onDragCancel:()=> {
             setDraggedNode(null)
         },
-        onDragEnd:(event)=> {
+        onDragEnd:()=> {
             setDraggedNode(null)
         },
      })
