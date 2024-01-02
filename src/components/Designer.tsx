@@ -61,7 +61,7 @@ const Designer = (props: Props) => {
     })
   return (
     <div className='w-full h-full flex scroll-smooth'>
-        <div ref={droppable.setNodeRef} className={cn('p-6 w-full max-w-[800px] lg:w-[90%] flex flex-col m-auto rounded-xl gap-2  flex-1 overflow-y-auto bg-slate-950 border-2 border-slate-800 text-white lg:h-[95%]  ',droppable.isOver&&'ring-2 ring-purple-400')}>
+        <div ref={droppable.setNodeRef} className={cn('p-6 w-full lg:max-w-[70%] max-w-[800px]   flex flex-col m-auto rounded-xl gap-2  flex-1 overflow-y-auto bg-slate-950 border-2 border-slate-800 text-white lg:h-full  ',droppable.isOver&&'ring-2 ring-purple-400')}>
         {
             !droppable.isOver ?elements.length==0&&    <p className="flex-grow text-2xl font-semibold text-neutral-200 flex items-center justify-center">Form Designer</p>:<></>
         }
@@ -69,8 +69,8 @@ const Designer = (props: Props) => {
             droppable.isOver &&elements.length===0 && <div className="w-full h-24 min-h-24 bg-neutral-100/30 "></div>
         }
         {
-            elements.length>0?elements.map((element)=>{
-                return <DesignerElementsWrapper key={element.id} element={element}/>
+            elements.length>0?elements.map((element,index)=>{
+                return <DesignerElementsWrapper key={element.id} element={element} shouldFocus={index==elements.length-1}/>
             }):<></>
         }
        
