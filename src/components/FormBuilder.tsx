@@ -22,14 +22,14 @@ export const FormBuilder:React.FC = () => {
   const sensors=useSensors(mouseSensor,touchSensor)
   return (
     <DndContext sensors={sensors}>
-    <section className='flex w-full h-screen'>
-        <div className="flex-1 bg-slate-600/80 bg-[url(/graph-paper.svg)] " onClick={()=>{
+    <section className='flex flex-1 h-full w-full gap-2'>
+        <div className="flex-1 " onClick={()=>{
           if(selectedElement) setSelectedElement(null)
         }}>
             <Designer/>
             <DragOverlayWrapper/>
         </div>
-        <div className='h-full w-[20%] ml-auto bg-[#0c0c0c] '>
+        <div className='h-full max-w-[240px] lg:w-[20%] ml-auto bg-[#0c0c0c] '>
             <DesignerSidebar/>
         </div>
     </section>
