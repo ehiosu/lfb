@@ -22,9 +22,7 @@ import { Switch } from "./ui/switch";
 const type: ElementType = "Text";
 export const TextFieldFormElement: FormElement = {
   type,
-  component: () => {
-    return <div>TextField</div>;
-  },
+  previewCompoennt: PreviewComponennt,
   construct: (id: string) => ({
     id,
     type,
@@ -51,7 +49,29 @@ function FormCompoent({ element }: { element: FormElementInstance }) {
         {element.extraAttributes?.required && " * "}
       </Label>
       <Input
+        readOnly
+        disabled  
         placeholder={element.extraAttributes?.placeholder || "Text Field"}
+      />
+      {element.extraAttributes?.helperText && (
+        <p className="text-[0.6275rem] pl-3 ">
+          {element.extraAttributes.helperText}
+        </p>
+      )}
+    </div>
+  );
+}
+
+function PreviewComponennt({ element }: { element: FormElementInstance }) {
+  return (
+    <div className="w-full space-y-2">
+      <Label>
+        {element.extraAttributes?.label}
+        {element.extraAttributes?.required && " * "}
+      </Label>
+      <Input
+        placeholder={element.extraAttributes?.placeholder || "Text Field"}
+        className="text-black"
       />
       {element.extraAttributes?.helperText && (
         <p className="text-[0.6275rem] pl-3 ">
@@ -126,7 +146,7 @@ function PropertiesComponent({ element }: { element: FormElementInstance }) {
                   onKeyDown={(e) => {
                     if (e.key === "Enter") e.currentTarget.blur();
                   }}
-                  onBlur={()=>form.handleSubmit(saveChanges)}
+                  onBlur={() => form.handleSubmit(saveChanges)}
                 />
               </FormControl>
               <FormDescription>Label of the Field</FormDescription>
@@ -143,12 +163,11 @@ function PropertiesComponent({ element }: { element: FormElementInstance }) {
               <FormControl>
                 <Input
                   className="w-full"
-                 
                   onKeyDown={(e) => {
                     if (e.key === "Enter") e.currentTarget.blur();
                   }}
                   {...field}
-                  onBlur={()=>form.handleSubmit(saveChanges)}
+                  onBlur={() => form.handleSubmit(saveChanges)}
                 />
               </FormControl>
               <FormDescription>Placeholder text of the Field</FormDescription>
@@ -169,7 +188,7 @@ function PropertiesComponent({ element }: { element: FormElementInstance }) {
                   onKeyDown={(e) => {
                     if (e.key === "Enter") e.currentTarget.blur();
                   }}
-                  onBlur={()=>form.handleSubmit(saveChanges)}
+                  onBlur={() => form.handleSubmit(saveChanges)}
                 />
               </FormControl>
               <FormDescription>
@@ -181,20 +200,23 @@ function PropertiesComponent({ element }: { element: FormElementInstance }) {
           )}
         ></FormField>
 
-<FormField
+        <FormField
           name="required"
           control={form.control}
           render={({ field }) => (
             <FormItem className="">
-             <div className="flex items-center gap-2 my-2">
-             <FormLabel>Is required</FormLabel>
-              <FormControl>
-                <Switch defaultChecked={field.value} onCheckedChange={field.onChange}/>
-              </FormControl>
-             </div>
-             
+              <div className="flex items-center gap-2 my-2">
+                <FormLabel>Is required</FormLabel>
+                <FormControl>
+                  <Switch
+                    defaultChecked={field.value}
+                    onCheckedChange={field.onChange}
+                  />
+                </FormControl>
+              </div>
+
               <FormDescription>
-               Determine if the field can be left empty or not.
+                Determine if the field can be left empty or not.
               </FormDescription>
               <FormMessage />
             </FormItem>
