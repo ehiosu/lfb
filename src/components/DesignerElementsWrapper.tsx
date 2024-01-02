@@ -10,8 +10,10 @@ type Props = {};
 
 export const DesignerElementsWrapper = ({
   element,
+  shouldFocus
 }: {
   element: FormElementInstance;
+  shouldFocus:boolean
 }) => {
   const FormComp = FormElements[element.type].formComponent;
   const {removeElement,setSelectedElement,selectedElement}=useBuilder()
@@ -61,7 +63,7 @@ export const DesignerElementsWrapper = ({
       }}
       onClick={(e)=>{e.stopPropagation() 
         setSelectedElement(element)}}
-     
+     autoFocus={shouldFocus}
     >
       {mouseOver && (
         <div className="absolute z-[20] w-full h-full">
