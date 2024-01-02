@@ -6,7 +6,9 @@ export type ElementType = "Text" | "H1"
 export type FormElement={
     type:ElementType,
     construct:(id:string)=>FormElementInstance,
-    component:React.FC,
+    previewCompoennt:React.FC<{
+        element:FormElementInstance
+    }>,
     designerElement:{
         icon:React.ReactElement,
         label:string
