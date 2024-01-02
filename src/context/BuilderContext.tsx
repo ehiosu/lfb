@@ -1,6 +1,13 @@
 import { FormElementInstance } from "@/lib/types"
 import { ReactNode, createContext, useState } from "react"
 
+type tabOptions="preview" | "builder" 
+type formState = "Settings" | null
+export type formAttributes={
+    name:string|undefined
+    isTwoStep:boolean,
+    child:string|null
+}
 type builderContextType={
     elements:FormElementInstance[],
     addElement:(index:number,element:FormElementInstance)=>void,
@@ -8,7 +15,14 @@ type builderContextType={
     removeElement:(id:string)=>void,
     selectedElement:FormElementInstance|null,
     setSelectedElement:React.Dispatch<React.SetStateAction<FormElementInstance | null>>,
-    updateElement:(id:string,element:FormElementInstance)=>void
+    updateElement:(id:string,element:FormElementInstance)=>void,
+    currentTab:tabOptions,
+    setCurrentTab:React.Dispatch<React.SetStateAction<tabOptions>>,
+    formState:formState,
+    setFormState:React.Dispatch<React.SetStateAction<formState>>,
+    formAttributes:formAttributes,
+    setFormAttributes:React.Dispatch<React.SetStateAction<formAttributes>>
+
 }
 
 export const BuilderContext=createContext<builderContextType|null>(null)
@@ -16,6 +30,10 @@ export const BuilderContext=createContext<builderContextType|null>(null)
 export default function BuilderProvider({children}:{children:ReactNode}){
     const [elements,setElements]=useState<FormElementInstance[]>([])
     const [selectedElement,setSelectedElement]=useState<FormElementInstance| null>(null)
+    const [currentTab,setCurrentTab]=useState<tabOptions>('builder')
+    const [formState,setFormState]=useState<formState>(null)
+    const [formAttributes,setFormAttributes]=useState<formAttributes>({name:undefined,isTwoStep:false,child:null})
+
     const addElement=(index:number,element:FormElementInstance)=>{
         setElements(prev=>
             {
@@ -36,7 +54,7 @@ export default function BuilderProvider({children}:{children:ReactNode}){
         _elements[elIndex]=element
         setElements(()=>_elements)
     }
-    return <BuilderContext.Provider value={{elements,addElement,removeElement,selectedElement,setSelectedElement,updateElement,setElements
+    return <BuilderContext.Provider value={{elements,addElement,removeElement,selectedElement,setSelectedElement,updateElement,setElements,currentTab,setCurrentTab,formState,setFormState,formAttributes,setFormAttributes
 
     }}>
         {children }
