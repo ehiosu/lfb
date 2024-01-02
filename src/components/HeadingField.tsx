@@ -19,9 +19,7 @@ export const HeadingField: FormElement = {
       text: "Heading 1",
     },
   }),
-  component: () => {
-    return <div>Component</div>;
-  },
+  previewCompoennt:PreviewComponennt,
   designerElement: {
     icon: <LuHeading1 className="text-xl" />,
     label: "Heading",
@@ -31,6 +29,14 @@ export const HeadingField: FormElement = {
 };
 
 function FormCompoent({ element }: { element: FormElementInstance }) {
+  return (
+    <div className="w-full text-[1.4rem] min-h-20 flex items-center">
+      <p >{element.extraAttributes?.text}</p>
+    </div>
+  );
+}
+
+function PreviewComponennt({ element }: { element: FormElementInstance }) {
   return (
     <div className="w-full text-[1.4rem] min-h-20 flex items-center">
       <p >{element.extraAttributes?.text}</p>
